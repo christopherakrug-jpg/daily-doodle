@@ -17,7 +17,7 @@ function renderPromptPath(canvas, pathData) {
   const path = new fabric.Path(pathData, {
     scaleX: scale,
     scaleY: scale,
-    stroke: '#1a1a1a',
+    stroke: '#D4845A',
     strokeWidth: 3,
     strokeUniform: true,
     fill: 'transparent',
@@ -160,7 +160,7 @@ const DrawingCanvas = forwardRef(function DrawingCanvas(
           <g ref={overlayGroupRef}>
             <path
               d={promptPath}
-              stroke={BRUSH_COLOR}
+              stroke="#D4845A"
               strokeWidth={3}
               fill="none"
               strokeLinecap="round"
