@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@theme {
+  --color-accent: #D4845A;
+  --color-accent-dark: #C07040;
+  --font-sans: 'Nunito', ui-rounded, system-ui, sans-serif;
+}
+
+body {
+  background-color: #FAFAF8;
+  font-family: 'Nunito', ui-rounded, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+input[type="range"] {
+  accent-color: #D4845A;
+}

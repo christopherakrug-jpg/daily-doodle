@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(npm create *)",
+      "PowerShell(& \"C:\\\\Program Files\\\\nodejs\\\\npm.cmd\" create vite@latest . -- --template react)",
+      "PowerShell(echo y | & \"C:\\\\Program Files\\\\nodejs\\\\npm.cmd\" create vite@latest . -- --template react)",
+      "PowerShell(& \"C:\\\\Program Files\\\\nodejs\\\\npm.cmd\" create vite@latest . -- --template react --overwrite)",
+      "PowerShell(& \"C:\\\\Program Files\\\\nodejs\\\\npm.cmd\" install; & \"C:\\\\Program Files\\\\nodejs\\\\npm.cmd\" install fabric@5 @supabase/supabase-js react-router-dom)",
+      "PowerShell(& \"C:\\\\Program Files\\\\nodejs\\\\npm.cmd\" install -D tailwindcss @tailwindcss/vite)",
+      "PowerShell(& \"C:\\\\Program Files\\\\nodejs\\\\npx.cmd\" vercel --version 2>&1)",
+      "PowerShell(Get-Content \"C:\\\\Users\\\\chris\\\\daily-doodle\\\\src\\\\components\\\\DrawingCanvas.jsx\" | Select-Object -Index \\(96,97,98,99,100\\))",
+      "PowerShell(Stop-Process *)"
+    ]
+  }
+}
