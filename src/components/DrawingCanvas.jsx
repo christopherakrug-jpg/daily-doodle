@@ -65,6 +65,10 @@ const DrawingCanvas = forwardRef(function DrawingCanvas(
     canvas.freeDrawingCursor = makeDotCursor(BRUSH_COLOR, 10, false)
     fabricRef.current = canvas
 
+    canvas.on('path:created', () => {
+      if (promptObjectRef.current) canvas.bringToFront(promptObjectRef.current)
+    })
+
     if (promptPathRef.current) {
       promptObjectRef.current = renderPromptPath(canvas, promptPathRef.current)
     }
