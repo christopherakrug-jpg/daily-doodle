@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useImperativeHandle, forwardRef, useState } from 'react'
+import { useEffect, useRef, useImperativeHandle, forwardRef } from 'react'
 import { fabric } from 'fabric'
 
 function makeDotCursor(color, size, isEraser) {
@@ -48,14 +48,10 @@ const DrawingCanvas = forwardRef(function DrawingCanvas(
   const fabricRef = useRef(null)
   const promptPathRef = useRef(promptPath)
   const promptObjectRef = useRef(null)
-  const [canvasSize, setCanvasSize] = useState(0)
-  const overlaySvgRef = useRef(null)
-  const overlayGroupRef = useRef(null)
 
   useEffect(() => {
     const container = containerRef.current
     const size = Math.min(container.offsetWidth || 320, 600)
-    setCanvasSize(size)
 
     const canvas = new fabric.Canvas(canvasElRef.current, {
       width: size,
@@ -87,19 +83,6 @@ const DrawingCanvas = forwardRef(function DrawingCanvas(
     if (promptObjectRef.current) canvas.remove(promptObjectRef.current)
     promptObjectRef.current = renderPromptPath(canvas, promptPath)
   }, [promptPath])
-
-  // Compute SVG overlay transform to match Fabric's centering, before paint to avoid flash
-  useLayoutEffect(() => {
-    if (!promptPath || !canvasSize || !overlaySvgRef.current || !overlayGroupRef.current) return
-    const pathEl = overlaySvgRef.current.querySelector('path')
-    if (!pathEl) return
-    const bbox = pathEl.getBBox()
-    if (bbox.width === 0 && bbox.height === 0) return
-    const scale = (canvasSize * 0.55) / 100
-    const tx = canvasSize / 2 - (bbox.x + bbox.width / 2) * scale
-    const ty = canvasSize / 2 - (bbox.y + bbox.height / 2) * scale
-    overlayGroupRef.current.setAttribute('transform', `translate(${tx}, ${ty}) scale(${scale})`)
-  }, [promptPath, canvasSize])
 
   useEffect(() => {
     const canvas = fabricRef.current
@@ -149,27 +132,6 @@ const DrawingCanvas = forwardRef(function DrawingCanvas(
       className="relative w-full max-w-[600px] mx-auto rounded-2xl overflow-hidden border-2 border-[#EDE8E1] shadow-sm"
     >
       <canvas ref={canvasElRef} style={{ display: 'block', touchAction: 'none' }} />
-      {promptPath && canvasSize > 0 && (
-        <svg
-          ref={overlaySvgRef}
-          width={canvasSize}
-          height={canvasSize}
-          style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none' }}
-          aria-hidden="true"
-        >
-          <g ref={overlayGroupRef}>
-            <path
-              d={promptPath}
-              stroke="#D4845A"
-              strokeWidth={3}
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              vectorEffect="non-scaling-stroke"
-            />
-          </g>
-        </svg>
-      )}
     </div>
   )
 })

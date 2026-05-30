@@ -9,7 +9,8 @@ export const supabase = isConfigured
   ? createClient(supabaseUrl, supabaseAnonKey)
   : null
 
-const todayDate = () => new Date().toISOString().split('T')[0]
+const todayDate = () =>
+  new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Chicago' }).format(new Date())
 
 export function getUserId() {
   let id = localStorage.getItem('doodle_user_id')
